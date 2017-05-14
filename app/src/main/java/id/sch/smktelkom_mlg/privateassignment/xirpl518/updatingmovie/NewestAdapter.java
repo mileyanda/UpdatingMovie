@@ -1,31 +1,89 @@
 package id.sch.smktelkom_mlg.privateassignment.xirpl518.updatingmovie;
 
-import java.io.Serializable;
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+
+import java.util.List;
 
 /**
  * Created by yanda on 14/05/2017.
  */
 
-public class NewestAdapter implements Serializable {
-    private String imageUrl;
-    private String title;
-    private String year;
+public class NewestAdapter extends RecyclerView.Adapter<NewestAdapter.ViewHolder> {
 
-    public NewestAdapter(String imageUrl, String title, String year) {
-        this.imageUrl = imageUrl;
-        this.title = title;
-        this.year = year;
+    private List<NewestListItem> newestListItems;
+    private Context context; //mode default, hanya bisa diakses dengan dipanggil
+
+    public NewestAdapter(List<NewestListItem> newestListItems, Context context) {
+        this.newestListItems = newestListItems;
+        this.context = context;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.newest_item, parent, false);
+        return new ViewHolder(v);
     }
 
-    public String getTitle() {
-        return title;
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        final NewestListItem newestListItem = newestListItems.get(position);
+
+//        holder.imageViewOtof.setImageResource(R.drawable.ic_memory_black_24dp);
+        holder.textViewTitle.setText(newestListItem.getTitle());
+        holder.textViewYear.setText(newestListItem.getYear());
+
+        Glide
+                .with(context)
+                .load(newestListItem.getImageUrl())
+                .into(holder.imageViewOtof);
+
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Will be released soon", Toast.LENGTH_LONG).show();
+
+//                Intent singleBlogIntent = new Intent(context, NewestDetailActivity.class);
+//                singleBlogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //addFLags membuka activity dari fragment
+//                singleBlogIntent.putExtra("blog_id", position); //position untuk menentukan posisi di array
+//                context.startActivity(singleBlogIntent);
+
+//                Intent singleBlogIntent = new Intent(context, DetailActivity.class);
+//                singleBlogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                singleBlogIntent.putExtra("blog_id", position);
+//                singleBlogIntent.putExtra("jenis", "Newest");
+//                context.startActivity(singleBlogIntent);
+            }
+        });
     }
 
-    public String getYear() {
-        return year;
+    @Override
+    public int getItemCount() {
+        return newestListItems.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        public TextView textViewTitle;
+        public TextView textViewYear;
+        public ImageView imageViewOtof;
+        public LinearLayout linearLayout;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+
+            textViewTitle = (TextView) itemView.findViewById(R.id.textViewHeadAve);
+            textViewYear = (TextView) itemView.findViewById(R.id.textViewDescAve);
+            imageViewOtof = (ImageView) itemView.findViewById(R.id.imageViewOtofAve);
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.LinearLayoutAve);
+        }
     }
 }
