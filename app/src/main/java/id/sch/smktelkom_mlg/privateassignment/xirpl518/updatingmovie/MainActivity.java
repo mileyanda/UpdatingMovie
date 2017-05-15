@@ -87,12 +87,12 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
 
             fragment = new NewestFragment();
-            setTitle("Avengers Movie");
+            setTitle("Newest Movie");
         }
         else if (id == R.id.nav_gallery) {
 
             fragment = new NewestFragment();
-            setTitle("Avengers Movie");
+            setTitle("Popular Movie");
 
         }
 
