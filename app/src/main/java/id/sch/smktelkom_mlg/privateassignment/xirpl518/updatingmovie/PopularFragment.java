@@ -25,18 +25,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Created by yanda on 15/05/2017.
  */
-public class NewestFragment extends Fragment {
+public class PopularFragment extends Fragment {
 
-    private static final String URL_DATA = "https://api.themoviedb.org/3/movie/top_rated?api_key=fa3aaf4614da022556b744ebb7d33982&language=en-US&page=1";
+    private static final String URL_DATA = "https://api.themoviedb.org/3/movie/popular?api_key=fa3aaf4614da022556b744ebb7d33982&language=en-US&page=1";
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
 
-    private List<NewestListItem> listItems;
+    private List<PopularListItem> listItems;
 
-    public NewestFragment() {
+    public PopularFragment() {
         // Required empty public constructor
     }
 
@@ -45,7 +45,7 @@ public class NewestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_newest, container, false);
+        View view = inflater.inflate(R.layout.fragment_popular, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewAve);
         recyclerView.setHasFixedSize(true);
@@ -77,7 +77,7 @@ public class NewestFragment extends Fragment {
 
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject o = array.getJSONObject(i);
-                                NewestListItem item = new NewestListItem(
+                                PopularListItem item = new PopularListItem(
                                         o.getString("poster_path"), //kalau ada kurung//kalau ada kurung
                                         o.getString("title"), //langsung titik dua
                                         o.getString("overview")
@@ -85,7 +85,7 @@ public class NewestFragment extends Fragment {
                                 listItems.add(item);
                             }
 
-                            adapter = new NewestAdapter(listItems, getActivity().getApplicationContext()); //mengirim ke adapter
+                            adapter = new PopularAdapter(listItems, getActivity().getApplicationContext()); //mengirim ke adapter
                             recyclerView.setAdapter(adapter); //menampilkan ke xml
 
                         } catch (JSONException e) {

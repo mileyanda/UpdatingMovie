@@ -88,6 +88,11 @@ public class MainActivity extends AppCompatActivity
 
             fragment = new NewestFragment();
             setTitle("Avengers Movie");
+        }
+        else if (id == R.id.nav_gallery) {
+
+            fragment = new NewestFragment();
+            setTitle("Avengers Movie");
 
         }
 
