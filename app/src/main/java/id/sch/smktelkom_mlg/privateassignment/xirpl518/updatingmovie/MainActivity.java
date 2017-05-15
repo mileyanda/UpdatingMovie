@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import id.sch.smktelkom_mlg.privateassignment.xirpl518.updatingmovie.NewestDB.FavoriteFragment;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -84,15 +86,17 @@ public class MainActivity extends AppCompatActivity
 
         Fragment fragment = null;
 
-        if (id == R.id.nav_home) {
-
+        if (id == R.id.nav_newest) {
             fragment = new NewestFragment();
             setTitle("Newest Movie");
         }
-        else if (id == R.id.nav_gallery) {
-
-            fragment = new NewestFragment();
+        else if (id == R.id.nav_popular) {
+            fragment = new PopularFragment();
             setTitle("Popular Movie");
+        }
+        else if (id == R.id.nav_favourite) {
+                fragment = new FavoriteFragment();
+                setTitle("Favourite Movie");
 
         }
 
